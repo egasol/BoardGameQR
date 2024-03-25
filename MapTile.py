@@ -17,7 +17,7 @@ class MapTile:
         if self.terrain == Terrain.Ground:
             symbol = " "
         elif self.terrain == Terrain.Wall:
-            symbol = "W"
+            symbol = "▢"
         else:
             symbol = "?"
         

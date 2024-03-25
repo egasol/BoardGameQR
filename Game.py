@@ -13,21 +13,18 @@ def main():
 	party = Party()
 	map = MapGrid((12, 12), party)
 	scanner = Scanner()
-	
+
 	map.draw_map()
 
-	party.action("north")
-	map.draw_map()
+	while (True):
+		action = input()
 
-	party.action("east")
-	map.draw_map()
+		if action != "exit":
+			party.action(action)
+			map.draw_map()
+		else:
+			break
 
-	party.action("south")
-	map.draw_map()
-
-	party.action("west")
-	map.draw_map()
-	
 
 if __name__ =="__main__":
 	main()

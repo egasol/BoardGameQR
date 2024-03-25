@@ -24,4 +24,9 @@ class Party:
         self.set_position(new_position)
     
     def action(self, action):
-        self.actions[action]()
+        if action in self.actions.keys():
+            self.actions[action]()
+            return True
+        else:
+            print("Invalid action...", action, "not in", self.actions.keys())
+            return False
