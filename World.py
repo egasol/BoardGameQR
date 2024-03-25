@@ -9,6 +9,7 @@ class MapGrid:
         self.world_map, self.start = self._generate_map(map_size)
         self.party = party
         party.set_position(self.start)
+        party.set_map(self)
     
     def _generate_map(self, map_size):
         print("generating map...")

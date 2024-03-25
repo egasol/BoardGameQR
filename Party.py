@@ -4,6 +4,7 @@ import functools
 class Party:
     def __init__(self):
         self.position = None
+        self.world = None
         self.hp = 10
 
         self.actions = {
@@ -16,12 +17,16 @@ class Party:
     def set_position(self, position):
         self.position = position
     
-    def print_position(self):
-        print(self.position)
+    def set_map(self, map_grid):
+        self.map_grid = map_grid
     
     def walk(self, direction):
         new_position = (self.position[0] + direction[0], self.position[1] + direction[1])
-        self.set_position(new_position)
+
+        tile = self.map_grid.world_map[new_position[0]][new_position[1]]
+
+        if tile.is_walkable():
+            self.set_position(new_position)
     
     def action(self, action):
         if action in self.actions.keys():

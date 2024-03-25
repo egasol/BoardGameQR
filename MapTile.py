@@ -22,3 +22,9 @@ class MapTile:
             symbol = "?"
         
         return symbol
+
+    def is_walkable(self):
+        if self.terrain == Terrain.Ground:
+            return True
+        else:
+            return False
