@@ -15,13 +15,17 @@ class MapGrid:
         print("generating map...")
         world_map = np.empty(map_size, dtype=object)
         world_map.flat = [MapTile(Terrain.Wall) for _ in world_map.flat]
+
+        padding = 4
         
-        start_x = random.choice(range(1, map_size[0]-1))
-        start_y = random.choice(range(1, map_size[1]-1))
-        for y in range(start_y-1, start_y+2):
-            for x in range(start_x-1, start_x+2):
+        start_x = random.choice(range(padding, map_size[0]-padding))
+        start_y = random.choice(range(padding, map_size[1]-padding))
+        for y in range(start_y-padding, start_y+padding+1):
+            for x in range(start_x-padding, start_x+padding+1):
                 tile = world_map[x][y]
                 tile.set_terrain(Terrain.Ground)
+
+        world_map[6][6].set_event(True)
 
         return world_map, (start_x, start_y)
     
