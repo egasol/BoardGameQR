@@ -45,3 +45,20 @@ class MapGrid:
             map_string += "\n"
 
         print(map_string)
+
+    def get_direction(self, position_from, position_to):
+        (x_from, y_from) = position_from
+        (x_to, y_to) = position_to
+
+        direction = ""
+
+        if y_to > y_from:
+            direction += "south"
+        if y_to < y_from:
+            direction += "north"
+        if x_to > x_from:
+            direction += "east"
+        if x_to < x_from:
+            direction += "west"
+
+        return direction

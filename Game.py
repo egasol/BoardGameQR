@@ -1,6 +1,7 @@
 from World import MapGrid
 from ScanQR import Scanner
 from Party import Party
+from TextToSpeech import TextToSpeech
 
 from enum import Enum, auto
 
@@ -15,6 +16,7 @@ def main():
     map = MapGrid((12, 12), party)
     scanner = Scanner()
     status = GameStatus.Action
+    tts = TextToSpeech()
 
     map.draw_map()
 
@@ -24,11 +26,15 @@ def main():
 
         if action is not None:
             if action != "exit":
-                party.action(action)
+                feedback = party.action(action)
+
+                if feedback is not None:
+                    tts.generate_audio(feedback)
                 map.draw_map()
             else:
                 break
         else:
+            tts.generate_audio("Unable to read card, try again.")
             print("Could not read card...")
 
 

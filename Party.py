@@ -27,14 +27,17 @@ class Party:
         self.map_grid = map_grid
 
     def walk(self, direction):
-        new_position = (self.position[0] + direction[0],
+        position_previous = self.position
+        position_new = (self.position[0] + direction[0],
                         self.position[1] + direction[1])
 
         try:
-            tile = self.map_grid.world_map[new_position[0]][new_position[1]]
+            tile = self.map_grid.world_map[position_new[0]][position_new[1]]
 
             if tile.is_walkable():
-                self.set_position(new_position)
+                self.set_position(position_new)
+
+                return "You walked to the " + self.map_grid.get_direction(position_previous, position_new)
         except:
             print("Map border...")
 
@@ -50,21 +53,16 @@ class Party:
             for x in range(x_from, x_to):
                 tile = self.map_grid.world_map[x][y]
                 if tile.event is not None:
-                    text = "Event detected to the "
-                    if y > py:
-                        text += "south"
-                    if y < py:
-                        text += "north"
-                    if x > px:
-                        text += "east"
-                    if x < px:
-                        text += "west"
-                    print(text)
+                    text = "Event detected to the " + \
+                        self.map_grid.get_direction(
+                            self.position, (x, y))
+
+                    return text
 
     def action(self, action):
         if action in self.actions.keys():
-            self.actions[action]()
-            return True
+            feedback = self.actions[action]()
+            return feedback
         else:
             print("Invalid action...", action, "not in", self.actions.keys())
-            return False
+            return None
