@@ -12,24 +12,24 @@ ELEVEL_CACHE = "Audio"
 
 
 class TextToSpeech:
-	def __init__(self):
-		self.client = client = ElevenLabs(api_key=ELEVEN_API_KEY)
+    def __init__(self):
+        self.client = client = ElevenLabs(api_key=ELEVEN_API_KEY)
 
-	def generate_audio(self, dialogue):
-		audio_hash = hashlib.sha256(dialogue.encode("utf8")).hexdigest()
-		audio_path = ELEVEL_CACHE / Path(audio_hash + ".mp3")
+    def generate_audio(self, dialogue):
+        audio_hash = hashlib.sha256(dialogue.encode("utf8")).hexdigest()
+        audio_path = ELEVEL_CACHE / Path(audio_hash + ".mp3")
 
-		if audio_path.exists():
-			with open(audio_path, "rb") as f:
-				audio = f.read()
-			play(audio)
-		else:
-			audio = self.client.generate(
-				text=dialogue,
-				voice=ELEVEN_VOICE,
-				model=ELEVEN_VERSION
-			)
+        if audio_path.exists():
+            with open(audio_path, "rb") as f:
+                audio = f.read()
+            play(audio)
+        else:
+            audio = self.client.generate(
+                text=dialogue,
+                voice=ELEVEN_VOICE,
+                model=ELEVEN_VERSION
+            )
 
-			audio_bytes = b"".join(audio)
-			play(audio_bytes)
-			save(audio_bytes, audio_path)
+            audio_bytes = b"".join(audio)
+            play(audio_bytes)
+            save(audio_bytes, audio_path)

@@ -23,7 +23,8 @@ class Scanner:
 
             if self.button.is_pressed:
                 for image_previous in self.images:
-                    data, bbox, _ = self.qr_detector.detectAndDecode(image_previous)
+                    data, bbox, _ = self.qr_detector.detectAndDecode(
+                        image_previous)
                     if bbox is not None:
                         if data:
                             return data

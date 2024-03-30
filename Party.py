@@ -14,15 +14,21 @@ class Party:
             "west": functools.partial(self.walk, (-1, 0)),
             "scout": functools.partial(self.scout, 2)
         }
-    
+
     def set_position(self, position):
+        tile = self.map_grid.world_map[position[0]][position[1]]
+
+        if tile.event == True:
+            print("Event triggered!")
+
         self.position = position
-    
+
     def set_map(self, map_grid):
         self.map_grid = map_grid
-    
+
     def walk(self, direction):
-        new_position = (self.position[0] + direction[0], self.position[1] + direction[1])
+        new_position = (self.position[0] + direction[0],
+                        self.position[1] + direction[1])
 
         try:
             tile = self.map_grid.world_map[new_position[0]][new_position[1]]

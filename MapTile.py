@@ -10,7 +10,7 @@ class MapTile:
     def __init__(self, terrain):
         self.terrain = terrain
         self.event = None
-    
+
     def set_terrain(self, terrain):
         self.terrain = terrain
 

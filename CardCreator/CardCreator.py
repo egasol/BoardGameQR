@@ -11,7 +11,8 @@ QR_WIDTH = QR_HEIGHT = QR_BOXSIZE * (QR_SIZE + 2 * QR_BORDER)
 
 CARD_ASPECTRATIO = 1.8
 CARD_SIZE = (QR_WIDTH, int(QR_HEIGHT*CARD_ASPECTRATIO))
-CARD_BACKGROUND_COLOR = (80, 120, 80)
+# CARD_BACKGROUND_COLOR = (80, 120, 80)
+CARD_BACKGROUND_COLOR = (0, 0, 0)
 CARD_BORDER_COLOR = (20, 100, 20)
 
 TEXT_FONT = "futurama.ttf"
@@ -32,9 +33,9 @@ def add_qr(image, action):
     qr.add_data(action)
     qr.make(fit=True)
 
-    image_qr =qr.make_image(fill_color="black", back_color="white")
+    image_qr = qr.make_image(fill_color="black", back_color="white")
 
-    image.paste(image_qr, (0, 0), mask=image_qr) 
+    image.paste(image_qr, (0, 0), mask=image_qr)
 
 
 def add_description(image, description):

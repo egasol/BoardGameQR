@@ -6,28 +6,31 @@ from enum import Enum, auto
 
 
 class GameStatus(Enum):
-	Action = auto()
-	Event = auto()
+    Action = auto()
+    Event = auto()
 
 
 def main():
-	party = Party()
-	map = MapGrid((12, 12), party)
-	scanner = Scanner()
-	status = GameStatus.Action
+    party = Party()
+    map = MapGrid((12, 12), party)
+    scanner = Scanner()
+    status = GameStatus.Action
 
-	map.draw_map()
+    map.draw_map()
 
-	while (True):
-		action = input() # Temporary for testing
-		# scanner.read_input()
+    while (True):
+        # action = input("Enter") # Temporary for testing
+        action = scanner.read_input()
 
-		if action != "exit":
-			party.action(action)
-			map.draw_map()
-		else:
-			break
+        if action is not None:
+            if action != "exit":
+                party.action(action)
+                map.draw_map()
+            else:
+                break
+        else:
+            print("Could not read card...")
 
 
-if __name__ =="__main__":
-	main()
+if __name__ == "__main__":
+    main()
