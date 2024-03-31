@@ -27,65 +27,85 @@ class MapGrid:
 
         event = {
             "name": "A couple of fishermen",
-            "enter": "You see two fishermen who are busy trying to catch fish.",
+            "enter": "You encounter two fishermen who are busy trying to catch fish.",
             "status":
             {
                 "fishingrod": True,
-                "noticed_fishing_rod": False,
+                "noticedFishingRod": False,
             },
-            "dialogue":
+            "interaction":
             {
                 "barter":
                 {
                     "prerequisite":
                     {
-                        "status_name": "fishingrod",
+                        "status_name": "noticedFishingRod",
                         True:
                         {
-                            "rate": 0.5,
-                            "success":
+                            "prerequisite":
                             {
-                                "response": "Here's a fishingrod for you",
-                                "status_update":
+                                "status_name": "fishingrod",
+                                True:
                                 {
-                                    "status_name": "fishingrod",
-                                    "status_set": False,
+                                    "rate": 0.8,
+                                    "success":
+                                    {
+                                        "response": ["The fishermen agree to trade you their fishingrod for 10 gold.",
+                                                     "You are able to convice the men the sell you their spare fishing rod for 10 gold"],
+                                        "status_update":
+                                        {
+                                            "status_name": "fishingrod",
+                                            "status_set": False,
+                                        },
+                                        "inventory_update":
+                                        {
+                                            "name": "fishingrod",
+                                            "amount": 1,
+                                        }
+                                    },
+                                    "failure":
+                                    {
+                                        "response": ["The fishermen angerly shoo you away, claiming that your bartering scare their catch.",
+                                                     "These men would rather not sell you their extra fishingrod. You look suspicious to them"],
+                                    }
                                 },
-                                "inventory_update":
+                                False:
                                 {
-                                    "name": "fishingrod",
-                                    "amount": 1,
+                                    "success":
+                                    {
+                                        "response": ["The fishermen claim that the've already traded you their only spare fishing rod.",
+                                                     "There's only two rods left, that the men currently are fishing with. It's not likely that you will be able to barter them."],
+                                    }
                                 }
-                            },
-                            "failure":
-                            {
-                                "response": "Go away, you're scaring the fish",
                             }
                         },
                         False:
                         {
                             "success":
                             {
-                                "response": "I have nothing to trade you.",
+                                "response": ["The fishermen claim that they got nothing to offer you.",
+                                             "These men carry no item of value."],
                             }
                         }
                     }
                 },
                 "perception":
                 {
-                    "rate": 0.8,
+                    "rate": 0.5,
                     "success":
                     {
-                        "response": "You notice that the fishermen have an extra fishing rod.",
+                        "response": ["You notice that there's an extra fishing rod beside the two men.",
+                                     "Among their fishing equipment, there's an old fishing rod that looks to have not been used for years."],
                         "status_update":
                         {
-                            "status_name": "noticed_fishing_rod",
+                            "status_name": "noticedFishingRod",
                             "status_set": True,
                         },
                     },
                     "failure":
                     {
-                        "response": "You notice nothing out of the ordinary.",
+                        "response": ["You notice nothing out of the ordinary.",
+                                     "There is nothing here that is worth investigating."],
                     }
                 }
             }

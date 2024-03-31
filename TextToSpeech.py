@@ -33,3 +33,5 @@ class TextToSpeech:
             audio_bytes = b"".join(audio)
             play(audio_bytes)
             save(audio_bytes, audio_path)
+
+        print(dialogue)

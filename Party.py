@@ -1,4 +1,5 @@
 import functools
+from random import random, choice
 
 
 class Party:
@@ -71,34 +72,47 @@ class Party:
         tile = self.map_grid.world_map[px][py]
 
         if tile.event is not None:
-            dialogue = tile.event["dialogue"].get(interact)
+            interaction = tile.event["interaction"].get(interact)
 
-            if dialogue is not None:
-                # TODO: Add prerequisite loop to enable any number of branches in dialogue.
-                prerequisite = dialogue.get("prerequisite")
+            if interaction is not None:
+                while True:
+                    prerequisite = interaction.get("prerequisite")
 
-                # TODO: Add possibility to check status / items of party or player.
-                if prerequisite is not None:
-                    status = tile.event["status"][prerequisite["status_name"]]
-                    dialogue = prerequisite[status]
+                    if prerequisite is not None:
+                        # TODO: Add possibility to check status / items of party or player.
+                        status = tile.event["status"][prerequisite["status_name"]]
+                        interaction = prerequisite[status]
+                    else:
+                        break
 
-                success_rate = dialogue.get("rate")
+                success_rate = interaction.get("rate")
 
                 if success_rate is None:
-                    response = dialogue.get("success")
+                    response = interaction.get("success")
                 else:
                     # TODO: Add modifier based on player stats.
-                    if 1 > success_rate:
-                        response = dialogue.get("success")
+                    # TODO: Consume card during rolls
+                    roll = random()
+                    if roll > success_rate:
+                        print(
+                            f"{interact} roll succeded! ({roll:.2f} > {success_rate:.2f})")
+                        response = interaction.get("success")
                     else:
-                        response = dialogue.get("failure")
+                        print(
+                            f"{interact} roll failed! ({roll:.2f} < {success_rate:.2f})")
+                        response = interaction.get("failure")
 
                 status_update = response.get("status_update")
                 response_voice = response.get("response")
 
+                if isinstance(response_voice, list):
+                    response_voice = choice(response_voice)
+
                 if status_update is not None:
-                    tile.event["status"][status_update["status_name"]
-                                         ] = status_update["status_set"]
+                    status_name = status_update["status_name"]
+                    status_value = status_update["status_set"]
+
+                    tile.event["status"][status_name] = status_value
 
                 # TODO: Add inventory manipulation based on inventory_update.
 
