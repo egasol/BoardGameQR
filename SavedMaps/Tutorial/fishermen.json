@@ -56,22 +56,67 @@
 			}
 		},
 		"perception": {
-			"rate": 0.5,
-			"success": {
-				"dialogue": [
-					"You notice that there's an extra fishing rod beside the two men.",
-					"Among their fishing equipment, there's an old fishing rod that looks to have not been used for years."
-				],
-				"status_update": {
-					"status_name": "noticedFishingRod",
-					"status_set": true
+			"prerequisite": {
+				"status_name": "fishingrod",
+				"true": {
+					"rate": 0.5,
+					"success": {
+						"dialogue": [
+							"You notice that there's an extra fishing rod beside the two men.",
+							"Among their fishing equipment, there's an old fishing rod that looks to have not been used for years."
+						],
+						"status_update": {
+							"status_name": "noticedFishingRod",
+							"status_set": true
+						}
+					},
+					"failure": {
+						"dialogue": [
+							"You notice nothing out of the ordinary.",
+							"There is nothing here that is worth investigating."
+						]
+					}
+				},
+				"false": {
+					"success": {
+						"dialogue": [
+							"Nothing is left here, considering you've already collected their fishing equipment.",
+							"There is nothing left here, that you've not already obtained."
+						]
+					}
 				}
-			},
-			"failure": {
-				"dialogue": [
-					"You notice nothing out of the ordinary.",
-					"There is nothing here that is worth investigating."
-				]
+			}
+		},
+		"threaten": {
+			"prerequisite": {
+				"status_name": "fishingrod",
+				"true": {
+					"rate": 0.7,
+					"success": {
+						"dialogue": [
+							"The men surrender to your authority, giving you a fishingrod. The only thing of value they have",
+							"Your threats scare the fishermen. They back up and offer a nice quality fishingrod as a treaty for free."
+						],
+						"status_update": {
+							"status_name": "fishingrod",
+							"status_set": false
+						}
+					},
+					"failure": {
+						"dialogue": [
+							"While you try your best to exercise your authority over them, the fishermen are unfaced at your attempts.",
+							"You try to make clear the consequences of not complying, but the men only mock you as they are scoffing at your threats and continue their business."
+						]
+					}
+				},
+				"false": {
+					"success": {
+						"dialogue": [
+							"They scurry away from their position, but they leave nothing left to offer.",
+							"You enjoy terrifying these plebians. But there's no bounty left to collect here."
+						]
+					}
+				}
 			}
 		}
 	}

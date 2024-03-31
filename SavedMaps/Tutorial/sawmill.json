@@ -1,0 +1,57 @@
+{
+	"name": "An abandoned sawwill",
+	"enter": "You encounter an abandoned sawmill. It has not been producing anything for decades.",
+	"status": {
+		"sawmill": true
+	},
+	"interaction": {
+		"barter": {
+			"success": {
+				"dialogue": [
+					"You attempt to barter with the inanimate facility, but it won't budge.",
+					"I'm not really sure what you're attempting to achieve here, this is no place for bartering."
+				]
+			}
+		},
+		"perception": {
+			"prerequisite": {
+				"status_name": "sawmill",
+				"true": {
+					"rate": 0.5,
+					"success": {
+						"dialogue": [
+							"Among the remains of industrial dust and outdated machinery, you notice a fully functional sawblade. It is free from rust",
+							"An unused sawblade is hidden among the numerous mechanical parts of the once productive facility. It is the only item left that is valuable."
+						],
+						"status_update": {
+							"status_name": "sawmill",
+							"status_set": false
+						}
+					},
+					"failure": {
+						"dialogue": [
+							"You search for some time among the equipement, but nothing but scrap is left.",
+							"There is nothing here that have not been condemned to face the decay of time."
+						]
+					}
+				},
+				"false": {
+					"success": {
+						"dialogue": [
+							"All other equipment here have been decayed and is of no use",
+							"The sawblade you've found was the only item not rusted to oblivion."
+						]
+					}
+				}
+			}
+		},
+		"threaten": {
+			"success": {
+				"dialogue": [
+					"You attempt to threaten the sawmill, but there is no response.",
+					"Despite your superior exercise in authority, it has no effect on the sawmill."
+				]
+			}
+		}
+	}
+}
