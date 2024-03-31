@@ -4,6 +4,7 @@ from enum import Enum, auto
 class Terrain(Enum):
     Ground = auto()
     Wall = auto()
+    Water = auto()
 
 
 class MapTile:
@@ -22,6 +23,8 @@ class MapTile:
             symbol = " "
         elif self.terrain == Terrain.Wall:
             symbol = "▢"
+        elif self.terrain == Terrain.Water:
+            symbol = "~"
         else:
             symbol = "?"
 

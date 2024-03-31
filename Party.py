@@ -16,6 +16,7 @@ class Party:
             "scout": functools.partial(self.scout, 2),
             "barter": functools.partial(self.interact, "barter"),
             "perception": functools.partial(self.interact, "perception"),
+            "threaten": functools.partial(self.interact, "threaten"),
         }
 
     def set_position(self, position):
