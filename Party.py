@@ -57,6 +57,8 @@ class Party:
         y_from = max(py - area, 0)
         y_to = min(py + area + 1, self.map_grid.world_map.shape[1] - 1)
 
+        scout_list = []
+
         for y in range(y_from, y_to):
             for x in range(x_from, x_to):
                 tile = self.map_grid.world_map[x][y]
@@ -66,7 +68,12 @@ class Party:
                         self.map_grid.get_direction(
                             self.position, (x, y))
 
-                    return text
+                    scout_list.append(text)
+
+        if len(scout_list) > 0:
+            return choice(scout_list)
+        else:
+            return "You see nothing of interest."
 
     def interact(self, interact):
         (px, py) = self.position
