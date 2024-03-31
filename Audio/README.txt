@@ -1,0 +1,1 @@
+Audio files that have been generated via text-to-speech is stored here to enable faster playback without having to generate the audio files again.

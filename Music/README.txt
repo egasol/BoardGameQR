@@ -1,0 +1,1 @@
+Background music files can be added in this folder which will be added to a playlist at the start of the game. Only mp3 files are currently supported.

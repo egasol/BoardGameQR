@@ -2,8 +2,12 @@ from World import MapGrid
 from ScanQR import Scanner
 from Party import Party
 from TextToSpeech import TextToSpeech
+from Music import MusicPlayer
 
 from enum import Enum, auto
+from pathlib import Path
+
+MUSIC_PATH = Path("Music")
 
 
 class GameStatus(Enum):
@@ -17,11 +21,13 @@ def main():
     scanner = Scanner()
     status = GameStatus.Action
     tts = TextToSpeech()
+    music = MusicPlayer(MUSIC_PATH)
 
     map.draw_map()
+    music.play()
 
     while (True):
-        # action = input("Enter") # Temporary for testing
+        # action = input("Enter:") # Temporary for testing
         action = scanner.read_input()
 
         if action is not None:

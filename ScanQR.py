@@ -22,6 +22,7 @@ class Scanner:
                 self.images.pop(0)
 
             if self.button.is_pressed:
+                print("Reading card...")
                 for image_previous in self.images:
                     data, bbox, _ = self.qr_detector.detectAndDecode(
                         image_previous)
