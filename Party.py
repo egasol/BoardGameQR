@@ -7,6 +7,9 @@ class Party:
         self.position = None
         self.map_grid = None
         self.hp = 10
+        self.inventory = {
+            "gold": 12,
+        }
 
         self.actions = {
             "north": functools.partial(self.walk, (0, -1)),
@@ -41,9 +44,10 @@ class Party:
 
             if tile.is_walkable():
                 feedback = self.set_position(position_new)
+                direction = self.map_grid.get_direction(position_previous, position_new)
 
                 if feedback is None:
-                    return "You walked to the " + self.map_grid.get_direction(position_previous, position_new)
+                    return "You " + choice(["walk", "traverse", "travel", "venture"]) + " to the " + direction
                 else:
                     return feedback
         except:
@@ -87,8 +91,14 @@ class Party:
                     prerequisite = interaction.get("prerequisite")
 
                     if prerequisite is not None:
-                        # TODO: Add possibility to check status / items of party or player.
-                        status = tile.event["status"][prerequisite["status_name"]]
+                        status_event = prerequisite.get("status_name")
+                        status_party = prerequisite.get("item")
+
+                        if status_event is not None:
+                            status = tile.event["status"][status_event]
+                        elif status_party is not None:
+                            status_amount = prerequisite["amount"]
+                            status = self.inventory.get(status_party) >= status_amount
                         status_string = "true" if status == True else "false"  # TODO: Fix this, ugly af
                         interaction = prerequisite[status_string]
                     else:
@@ -112,6 +122,7 @@ class Party:
                         response = interaction.get("failure")
 
                 status_update = response.get("status_update")
+                inventory_update = response.get("inventory_update")
                 dialogue = response.get("dialogue")
 
                 if isinstance(dialogue, list):
@@ -123,7 +134,16 @@ class Party:
 
                     tile.event["status"][status_name] = status_value
 
-                # TODO: Add inventory manipulation based on inventory_update.
+                if inventory_update is not None:
+                    for item in inventory_update:
+                        item_name = item["name"]
+                        item_amount = item["amount"]
+                        if item["name"] in self.inventory:
+                            self.inventory[item_name] += item_amount
+                        else:
+                            self.inventory[item_name] = item_amount
+
+                    print(self.inventory)
 
                 return dialogue
             else:

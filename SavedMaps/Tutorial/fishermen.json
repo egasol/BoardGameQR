@@ -13,26 +13,45 @@
 					"prerequisite": {
 						"status_name": "fishingrod",
 						"true": {
-							"rate": 0.8,
-							"success": {
-								"dialogue": [
-									"The fishermen agree to trade you their fishingrod for 10 gold.",
-									"You are able to convice the men the sell you their spare fishing rod for 10 gold"
-								],
-								"status_update": {
-									"status_name": "fishingrod",
-									"status_set": false
+							"prerequisite": {
+								"item": "gold",
+								"amount": 10,
+								"true": {
+									"rate": 0.8,
+									"success": {
+										"dialogue": [
+											"The fishermen agree to trade you their fishingrod for 10 gold.",
+											"You are able to convice the men the sell you their spare fishing rod for 10 gold"
+										],
+										"status_update": {
+											"status_name": "fishingrod",
+											"status_set": false
+										},
+										"inventory_update": [
+											{
+												"name": "fishingrod",
+												"amount": 1
+											},
+											{
+												"name": "gold",
+												"amount": -10
+											}
+										]
+									},
+									"failure": {
+										"dialogue": [
+											"The fishermen angerly shoo you away, claiming that your bartering scare their catch.",
+											"These men would rather not sell you their extra fishingrod. You look suspicious to them"
+										]
+									}
 								},
-								"inventory_update": {
-									"name": "fishingrod",
-									"amount": 1
+								"false": {
+									"success": {
+										"dialogue": [
+											"You do not have enough money to trade the fishingrod."
+										]
+									}
 								}
-							},
-							"failure": {
-								"dialogue": [
-									"The fishermen angerly shoo you away, claiming that your bartering scare their catch.",
-									"These men would rather not sell you their extra fishingrod. You look suspicious to them"
-								]
 							}
 						},
 						"false": {
