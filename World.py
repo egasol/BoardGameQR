@@ -1,119 +1,48 @@
 from MapTile import MapTile, Terrain
 
-import random
 import numpy as np
+import json
+from pathlib import Path
 
 
 class MapGrid:
     def __init__(self, map_size, party):
-        self.world_map, self.start = self._generate_map(map_size)
+        self.world_map, self.start = self._generate_map(
+            Path("SavedMaps/Tutorial"))
         self.party = party
         party.set_map(self)
         party.set_position(self.start)
 
-    def _generate_map(self, map_size):
-        print("generating map...")
+    def _generate_map(self, map_path):
+        map_file = map_path / Path("map.json")
+
+        with open(map_file, "r") as f:
+            map_saved = json.load(f)
+
+        map_size = (map_saved["map_size"][0], map_saved["map_size"][1])
+        map_grid = map_saved["map_grid"]
+        map_start = (map_saved["start_point"][0], map_saved["start_point"][1])
+        map_events = map_saved["events"]
+
         world_map = np.empty(map_size, dtype=object)
         world_map.flat = [MapTile(Terrain.Wall) for _ in world_map.flat]
 
-        padding = 4
-
-        start_x = random.choice(range(padding, map_size[0]-padding))
-        start_y = random.choice(range(padding, map_size[1]-padding))
-        for y in range(start_y-padding, start_y+padding+1):
-            for x in range(start_x-padding, start_x+padding+1):
+        for y in range(world_map.shape[1]):
+            for x in range(world_map.shape[0]):
                 tile = world_map[x][y]
-                tile.set_terrain(Terrain.Ground)
+                tile.set_terrain(Terrain(int(map_grid[y][x])))
 
-        event = {
-            "name": "A couple of fishermen",
-            "enter": "You encounter two fishermen who are busy trying to catch fish.",
-            "status":
-            {
-                "fishingrod": True,
-                "noticedFishingRod": False,
-            },
-            "interaction":
-            {
-                "barter":
-                {
-                    "prerequisite":
-                    {
-                        "status_name": "noticedFishingRod",
-                        True:
-                        {
-                            "prerequisite":
-                            {
-                                "status_name": "fishingrod",
-                                True:
-                                {
-                                    "rate": 0.8,
-                                    "success":
-                                    {
-                                        "response": ["The fishermen agree to trade you their fishingrod for 10 gold.",
-                                                     "You are able to convice the men the sell you their spare fishing rod for 10 gold"],
-                                        "status_update":
-                                        {
-                                            "status_name": "fishingrod",
-                                            "status_set": False,
-                                        },
-                                        "inventory_update":
-                                        {
-                                            "name": "fishingrod",
-                                            "amount": 1,
-                                        }
-                                    },
-                                    "failure":
-                                    {
-                                        "response": ["The fishermen angerly shoo you away, claiming that your bartering scare their catch.",
-                                                     "These men would rather not sell you their extra fishingrod. You look suspicious to them"],
-                                    }
-                                },
-                                False:
-                                {
-                                    "success":
-                                    {
-                                        "response": ["The fishermen claim that the've already traded you their only spare fishing rod.",
-                                                     "There's only two rods left, that the men currently are fishing with. It's not likely that you will be able to barter them."],
-                                    }
-                                }
-                            }
-                        },
-                        False:
-                        {
-                            "success":
-                            {
-                                "response": ["The fishermen claim that they got nothing to offer you.",
-                                             "These men carry no item of value."],
-                            }
-                        }
-                    }
-                },
-                "perception":
-                {
-                    "rate": 0.5,
-                    "success":
-                    {
-                        "response": ["You notice that there's an extra fishing rod beside the two men.",
-                                     "Among their fishing equipment, there's an old fishing rod that looks to have not been used for years."],
-                        "status_update":
-                        {
-                            "status_name": "noticedFishingRod",
-                            "status_set": True,
-                        },
-                    },
-                    "failure":
-                    {
-                        "response": ["You notice nothing out of the ordinary.",
-                                     "There is nothing here that is worth investigating."],
-                    }
-                }
-            }
-        }
+        for map_event in map_events:
+            event_location_x = map_event["x"],
+            event_location_y = map_event["y"],
+            event_filepath = map_path / Path(map_event["file"])
 
-        world_map[6][6].set_event(event)
+            with open(event_filepath, "r") as f:
+                event = json.load(f)
 
-        return world_map, (start_x, start_y)
+            world_map[event_location_x][event_location_y].set_event(event)
+
+        return world_map, map_start
 
     def draw_map(self):
         width, height = np.shape(self.world_map)

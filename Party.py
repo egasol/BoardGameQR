@@ -81,7 +81,8 @@ class Party:
                     if prerequisite is not None:
                         # TODO: Add possibility to check status / items of party or player.
                         status = tile.event["status"][prerequisite["status_name"]]
-                        interaction = prerequisite[status]
+                        status_string = "true" if status == True else "false"  # TODO: Fix this, ugly af
+                        interaction = prerequisite[status_string]
                     else:
                         break
 
@@ -103,10 +104,10 @@ class Party:
                         response = interaction.get("failure")
 
                 status_update = response.get("status_update")
-                response_voice = response.get("response")
+                dialogue = response.get("dialogue")
 
-                if isinstance(response_voice, list):
-                    response_voice = choice(response_voice)
+                if isinstance(dialogue, list):
+                    dialogue = choice(dialogue)
 
                 if status_update is not None:
                     status_name = status_update["status_name"]
@@ -116,7 +117,7 @@ class Party:
 
                 # TODO: Add inventory manipulation based on inventory_update.
 
-                return response_voice
+                return dialogue
             else:
                 return "You can not do that here."
         else:

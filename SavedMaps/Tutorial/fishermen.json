@@ -1,0 +1,78 @@
+{
+	"name": "A couple of fishermen",
+	"enter": "You encounter two fishermen who are busy trying to catch fish.",
+	"status": {
+		"fishingrod": true,
+		"noticedFishingRod": false
+	},
+	"interaction": {
+		"barter": {
+			"prerequisite": {
+				"status_name": "noticedFishingRod",
+				"true": {
+					"prerequisite": {
+						"status_name": "fishingrod",
+						"true": {
+							"rate": 0.8,
+							"success": {
+								"dialogue": [
+									"The fishermen agree to trade you their fishingrod for 10 gold.",
+									"You are able to convice the men the sell you their spare fishing rod for 10 gold"
+								],
+								"status_update": {
+									"status_name": "fishingrod",
+									"status_set": false
+								},
+								"inventory_update": {
+									"name": "fishingrod",
+									"amount": 1
+								}
+							},
+							"failure": {
+								"dialogue": [
+									"The fishermen angerly shoo you away, claiming that your bartering scare their catch.",
+									"These men would rather not sell you their extra fishingrod. You look suspicious to them"
+								]
+							}
+						},
+						"false": {
+							"success": {
+								"dialogue": [
+									"The fishermen claim that the've already traded you their only spare fishing rod.",
+									"There's only two rods left, that the men currently are fishing with. It's not likely that you will be able to barter them."
+								]
+							}
+						}
+					}
+				},
+				"false": {
+					"success": {
+						"dialogue": [
+							"The fishermen claim that they got nothing to offer you.",
+							"These men carry no item of value."
+						]
+					}
+				}
+			}
+		},
+		"perception": {
+			"rate": 0.5,
+			"success": {
+				"dialogue": [
+					"You notice that there's an extra fishing rod beside the two men.",
+					"Among their fishing equipment, there's an old fishing rod that looks to have not been used for years."
+				],
+				"status_update": {
+					"status_name": "noticedFishingRod",
+					"status_set": true
+				}
+			},
+			"failure": {
+				"dialogue": [
+					"You notice nothing out of the ordinary.",
+					"There is nothing here that is worth investigating."
+				]
+			}
+		}
+	}
+}
