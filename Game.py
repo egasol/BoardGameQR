@@ -27,8 +27,8 @@ def main():
     music.play()
 
     while (True):
-        # action = input("Enter:") # Temporary for testing
-        action = scanner.read_input()
+        action = input("Enter:")  # Temporary for testing
+        # action = scanner.read_input()
 
         if action is not None:
             if action != "exit":

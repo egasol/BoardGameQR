@@ -25,7 +25,73 @@ class MapGrid:
                 tile = world_map[x][y]
                 tile.set_terrain(Terrain.Ground)
 
-        world_map[6][6].set_event(True)
+        event = {
+            "name": "A couple of fishermen",
+            "enter": "You see two fishermen who are busy trying to catch fish.",
+            "status":
+            {
+                "fishingrod": True,
+                "noticed_fishing_rod": False,
+            },
+            "dialogue":
+            {
+                "barter":
+                {
+                    "prerequisite":
+                    {
+                        "status_name": "fishingrod",
+                        True:
+                        {
+                            "rate": 0.5,
+                            "success":
+                            {
+                                "response": "Here's a fishingrod for you",
+                                "status_update":
+                                {
+                                    "status_name": "fishingrod",
+                                    "status_set": False,
+                                },
+                                "inventory_update":
+                                {
+                                    "name": "fishingrod",
+                                    "amount": 1,
+                                }
+                            },
+                            "failure":
+                            {
+                                "response": "Go away, you're scaring the fish",
+                            }
+                        },
+                        False:
+                        {
+                            "success":
+                            {
+                                "response": "I have nothing to trade you.",
+                            }
+                        }
+                    }
+                },
+                "perception":
+                {
+                    "rate": 0.8,
+                    "success":
+                    {
+                        "response": "You notice that the fishermen have an extra fishing rod.",
+                        "status_update":
+                        {
+                            "status_name": "noticed_fishing_rod",
+                            "status_set": True,
+                        },
+                    },
+                    "failure":
+                    {
+                        "response": "You notice nothing out of the ordinary.",
+                    }
+                }
+            }
+        }
+
+        world_map[6][6].set_event(event)
 
         return world_map, (start_x, start_y)
 
