@@ -5,8 +5,8 @@ import argparse
 from pathlib import Path
 
 
-FILE_IGNORE = "map.json"
-KEYS_INCLUDE = ["dialogue", "enter"]
+FILE_IGNORE = None
+KEYS_INCLUDE = ["dialogue", "enter", "opening_dialogue"]
 
 
 def find_dialogue_files(map_path):
@@ -60,13 +60,10 @@ if __name__ == "__main__":
     file_list = find_dialogue_files(args.path)
     dialogue_list = extract_dialogue(file_list)
 
-    print("Found", len(dialogue_list), "lines of dialogue.")
-
+    # TODO: Remove duplicates in dialogue_list
     # TODO: Add common modifiers (ex. scout action)
 
-    print("Generating audio...")
-
-    # TODO: Remove duplicates in dialogue_list
+    print("Found", len(dialogue_list), "lines of dialogue. Generating audio...")
 
     for dialogue in dialogue_list:
         tts.generate_audio(dialogue, play_audio=False)

@@ -6,14 +6,14 @@ from pathlib import Path
 
 
 class MapGrid:
-    def __init__(self, map_size, party):
-        self.world_map, self.start = self._generate_map(
-            Path("SavedMaps/Tutorial"))
+    def __init__(self, map_path, party):
+        self.world_map, self.start, self.opening_dialogue = self.load_map(
+            map_path)
         self.party = party
         party.set_map(self)
         party.set_position(self.start)
 
-    def _generate_map(self, map_path):
+    def load_map(self, map_path):
         map_file = map_path / Path("map.json")
 
         with open(map_file, "r") as f:
@@ -42,7 +42,9 @@ class MapGrid:
 
             world_map[event_location_x][event_location_y].set_event(event)
 
-        return world_map, map_start
+        opening_dialogue = map_saved["opening_dialogue"]
+
+        return world_map, map_start, opening_dialogue
 
     def draw_map(self):
         width, height = np.shape(self.world_map)

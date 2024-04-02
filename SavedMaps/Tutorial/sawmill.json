@@ -1,5 +1,5 @@
 {
-	"name": "An abandoned sawwill",
+	"name": "an abandoned sawmill",
 	"enter": "You encounter an abandoned sawmill. It has not been producing anything for decades.",
 	"status": {
 		"sawmill": true
@@ -26,7 +26,13 @@
 						"status_update": {
 							"status_name": "sawmill",
 							"status_set": false
-						}
+						},
+						"inventory_update": [
+							{
+								"name": "sawblade",
+								"amount": 1
+							}
+						]
 					},
 					"failure": {
 						"dialogue": [

@@ -6,6 +6,7 @@ from Music import MusicPlayer
 
 from enum import Enum, auto
 from pathlib import Path
+from time import sleep
 
 MUSIC_PATH = Path("Music")
 
@@ -17,7 +18,7 @@ class GameStatus(Enum):
 
 def main():
     party = Party()
-    map = MapGrid((12, 12), party)
+    map = MapGrid(Path("SavedMaps/Tutorial"), party)
     scanner = Scanner()
     status = GameStatus.Action
     tts = TextToSpeech()
@@ -25,6 +26,7 @@ def main():
 
     map.draw_map()
     music.play()
+    tts.generate_audio(map.opening_dialogue)
 
     while (True):
         action = input("Enter:")  # Temporary for testing
