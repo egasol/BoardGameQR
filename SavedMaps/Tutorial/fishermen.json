@@ -1,5 +1,6 @@
 {
 	"name": "A couple of fishermen",
+	"symbol": "☸",
 	"enter": "You encounter two fishermen who are busy trying to catch fish.",
 	"status": {
 		"fishingrod": true,

@@ -42,7 +42,7 @@ class Party:
         try:
             tile = self.map_grid.world_map[position_new[0]][position_new[1]]
 
-            if tile.is_walkable():
+            if tile.is_walkable:
                 feedback = self.set_position(position_new)
                 direction = self.map_grid.get_direction(position_previous, position_new)
 
@@ -50,6 +50,8 @@ class Party:
                     return "You " + choice(["walk", "traverse", "travel", "venture"]) + " to the " + direction
                 else:
                     return feedback
+            else:
+                return "The way ahead is blocked by " + tile.name
         except:
             return "You can not walk any further."
 

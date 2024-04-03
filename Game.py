@@ -26,6 +26,7 @@ def main():
 
     map.draw_map()
     music.play()
+    sleep(3)
     tts.generate_audio(map.opening_dialogue)
 
     while (True):

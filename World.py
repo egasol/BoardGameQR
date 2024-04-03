@@ -25,12 +25,10 @@ class MapGrid:
         map_events = map_saved["events"]
 
         world_map = np.empty(map_size, dtype=object)
-        world_map.flat = [MapTile(Terrain.Wall) for _ in world_map.flat]
 
         for y in range(world_map.shape[1]):
             for x in range(world_map.shape[0]):
-                tile = world_map[x][y]
-                tile.set_terrain(Terrain(int(map_grid[y][x])))
+                world_map[x][y] = MapTile(Terrain(int(map_grid[y][x])))
 
         for map_event in map_events:
             event_location_x = map_event["x"],
@@ -57,7 +55,7 @@ class MapGrid:
                 if self.party.position == (x, y):
                     symbol = "P"
                 else:
-                    symbol = tile.get_symbol()
+                    symbol = tile.symbol
                 map_string += symbol + " "
             map_string += "\n"
 
