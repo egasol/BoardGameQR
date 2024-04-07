@@ -9,6 +9,9 @@ from pathlib import Path
 from time import sleep
 
 MUSIC_PATH = Path("Music")
+MAP_PATH = Path("SavedMaps/Tutorial")
+PLAY_AUDIO = False
+DEBUG_MODE = True
 
 
 class GameStatus(Enum):
@@ -18,7 +21,7 @@ class GameStatus(Enum):
 
 def main():
     party = Party()
-    map = MapGrid(Path("SavedMaps/Tutorial"), party)
+    map = MapGrid(MAP_PATH, party)
     scanner = Scanner()
     status = GameStatus.Action
     tts = TextToSpeech()
@@ -30,15 +33,17 @@ def main():
     tts.generate_audio(map.opening_dialogue)
 
     while (True):
-        action = input("Enter:")  # Temporary for testing
-        # action = scanner.read_input()
+        if not DEBUG_MODE:
+            action = scanner.read_input()
+        else:
+            action = input("Enter:")
 
         if action is not None:
             if action != "exit":
                 feedback = party.action(action)
 
                 if feedback is not None:
-                    tts.generate_audio(feedback)
+                    tts.generate_audio(feedback, play_audio=PLAY_AUDIO)
                 map.draw_map()
             else:
                 break
