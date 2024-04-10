@@ -1,6 +1,6 @@
 {
 	"name": "A couple of fishermen",
-	"symbol": "☸",
+	"symbol": "♙",
 	"enter": "You encounter two fishermen who are busy trying to catch fish.",
 	"status": {
 		"fishingrod": true,
@@ -120,7 +120,13 @@
 						"status_update": {
 							"status_name": "fishingrod",
 							"status_set": false
-						}
+						},
+						"inventory_update": [
+							{
+								"name": "fishingrod",
+								"amount": 1
+							}
+						]
 					},
 					"failure": {
 						"dialogue": [

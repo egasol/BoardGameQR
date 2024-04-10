@@ -30,9 +30,10 @@ def main():
     map.draw_map()
     music.play()
     sleep(3)
-    tts.generate_audio(map.opening_dialogue)
+    tts.generate_audio(map.opening_dialogue, play_audio=PLAY_AUDIO)
+    game_ongoing = True
 
-    while (True):
+    while (game_ongoing):
         if not DEBUG_MODE:
             action = scanner.read_input()
         else:
@@ -46,7 +47,7 @@ def main():
                     tts.generate_audio(feedback, play_audio=PLAY_AUDIO)
                 map.draw_map()
             else:
-                break
+                game_ongoing = False
         else:
             tts.generate_audio("Unable to read card, try again.")
             print("Could not read card...")
