@@ -28,6 +28,11 @@
 			"x": 4,
 			"y": 8,
 			"file": "sawmill.json"
+		},
+		{
+			"x": 5,
+			"y": 4,
+			"file": "well.json"
 		}
 	]
 }

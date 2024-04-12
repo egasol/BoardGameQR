@@ -24,6 +24,7 @@ class Party:
             "barter": functools.partial(self.interact, "barter"),
             "perception": functools.partial(self.interact, "perception"),
             "threaten": functools.partial(self.interact, "threaten"),
+            "collect": functools.partial(self.interact, "collect"),
         }
 
     def set_position(self, position):
@@ -104,7 +105,11 @@ class Party:
                             status = tile.event["status"][status_event]
                         elif status_party is not None:
                             status_amount = prerequisite["amount"]
-                            status = self.inventory.get(status_party) >= status_amount
+                            party_amount = self.inventory.get(status_party)
+                            if party_amount is not None:
+                                status = party_amount >= status_amount
+                            else:
+                                status = False
                         status_string = "true" if status == True else "false"  # TODO: Fix this, ugly af
                         interaction = prerequisite[status_string]
                     else:

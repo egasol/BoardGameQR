@@ -1,0 +1,125 @@
+{
+	"name": "an old well",
+	"symbol": "⛁",
+	"enter": "You find yourself at a water well. It looks like it's still in used by the locals.",
+	"status": {
+		"noticed_shiny": false,
+		"shiny": true
+	},
+	"interaction": {
+		"barter": {
+			"success": {
+				"dialogue": [
+					"What the hell are you trying to barter with a well for?",
+					"Can you stop trying to trade with inanimate objects?"
+				]
+			}
+		},
+		"perception": {
+			"prerequisite": {
+				"status_name": "noticed_shiny",
+				"true": {
+					"success": {
+						"dialogue": [
+							"You still see the glittering stuff down at the bottom of the well",
+							"You really should get your hands on that treasure"
+						]
+					}
+				},
+				"false": {
+					"rate": 0.5,
+					"success": {
+						"dialogue": [
+							"You notice some really shiny stuff down at the bottom of the well",
+							"As you investigate the well closely, your eyes lock on to something valuable within it."
+						],
+						"status_update": {
+							"status_name": "noticed_shiny",
+							"status_set": true
+						}
+					},
+					"failure": {
+						"dialogue": [
+							"There's water in the well. Nothing surprising here.",
+							"This is definitely a well."
+						]
+					}
+				}
+			}
+		},
+		"threaten": {
+			"success": {
+				"dialogue": [
+					"You won't be able to scare this well, or any well to be honest",
+					"This is not the way"
+				]
+			}
+		},
+		"collect": {
+			"prerequisite": {
+				"status_name": "noticed_shiny",
+				"true": {
+					"prerequisite": {
+						"status_name": "shiny",
+						"true": {
+							"prerequisite": {
+								"item": "fishingrod",
+								"amount": 1,
+								"true": {
+									"rate": 0.7,
+									"success": {
+										"dialogue": [
+											"You take your fishingrod and send the line down the well, the hook connect with the item and you are able to drag it to the surface."
+										],
+										"status_update": {
+											"status_name": "shiny",
+											"status_set": false
+										},
+										"inventory_update": [
+											{
+												"name": "shiny",
+												"amount": 1
+											}
+										]
+									},
+									"failure": {
+										"dialogue": [
+											"You try to catch the item using your fishing equipment, but you accidently drop it down the well"
+										],
+										"inventory_update": [
+											{
+												"name": "fishingrod",
+												"amount": -1
+											}
+										]
+									}
+								},
+								"false": {
+									"success": {
+										"dialogue": [
+											"You can not reach far enough to collect the item at the bottom of the well"
+										]
+									}
+								}
+							}
+						},
+						"false": {
+							"success": {
+								"dialogue": [
+									"There's nothing left here to collect."
+								]
+							}
+						}
+					}
+				},
+				"false": {
+					"success": {
+						"dialogue": [
+							"You find nothing to collect here."
+						]
+					}
+				}
+			}
+		}
+	}
+}
