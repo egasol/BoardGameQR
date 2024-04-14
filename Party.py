@@ -1,5 +1,5 @@
 import functools
-from random import random, choice
+from random import randint, choice
 
 
 class Party:
@@ -49,7 +49,8 @@ class Party:
 
             if tile.is_walkable:
                 feedback = self.set_position(position_new)
-                direction = self.map_grid.get_direction(position_previous, position_new)
+                direction = self.map_grid.get_direction(
+                    position_previous, position_new)
 
                 if feedback is None:
                     return "You " + choice(["walk", "traverse", "travel", "venture"]) + " to the " + direction
@@ -118,18 +119,19 @@ class Party:
                 success_rate = interaction.get("rate")
 
                 if success_rate is None:
+                    # TODO: Replace with response = interaction after updating event files
                     response = interaction.get("success")
                 else:
                     # TODO: Add modifier based on player stats.
                     # TODO: Consume card during rolls
-                    roll = random()
+                    roll = randint(1, 20)
                     if roll > success_rate:
                         print(
-                            f"{interact} roll succeded! ({roll:.2f} > {success_rate:.2f})")
+                            f"{interact} roll succeded! ⚂ {roll} > {success_rate}")
                         response = interaction.get("success")
                     else:
                         print(
-                            f"{interact} roll failed! ({roll:.2f} < {success_rate:.2f})")
+                            f"{interact} roll failed! ⚂ {roll} < {success_rate}")
                         response = interaction.get("failure")
 
                 status_update = response.get("status_update")

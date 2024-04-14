@@ -18,11 +18,11 @@
 								"item": "gold",
 								"amount": 10,
 								"true": {
-									"rate": 0.8,
+									"rate": 6,
 									"success": {
 										"dialogue": [
 											"The fishermen agree to trade you their fishingrod for 10 gold.",
-											"You are able to convice the men the sell you their spare fishing rod for 10 gold"
+											"You are able to convince the men the sell you their spare fishing rod for 10 gold"
 										],
 										"status_update": {
 											"status_name": "fishingrod",
@@ -79,7 +79,7 @@
 			"prerequisite": {
 				"status_name": "fishingrod",
 				"true": {
-					"rate": 0.5,
+					"rate": 8,
 					"success": {
 						"dialogue": [
 							"You notice that there's an extra fishing rod beside the two men.",
@@ -111,7 +111,7 @@
 			"prerequisite": {
 				"status_name": "fishingrod",
 				"true": {
-					"rate": 0.7,
+					"rate": 14,
 					"success": {
 						"dialogue": [
 							"The men surrender to your authority, giving you a fishingrod. The only thing of value they have",
