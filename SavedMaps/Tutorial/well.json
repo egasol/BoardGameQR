@@ -8,23 +8,19 @@
 	},
 	"interaction": {
 		"barter": {
-			"success": {
-				"dialogue": [
-					"What the hell are you trying to barter with a well for?",
-					"Can you stop trying to trade with inanimate objects?"
-				]
-			}
+			"dialogue": [
+				"What the hell are you trying to barter with a well for?",
+				"Can you stop trying to trade with inanimate objects?"
+			]
 		},
 		"perception": {
 			"prerequisite": {
 				"status_name": "noticed_shiny",
 				"true": {
-					"success": {
-						"dialogue": [
-							"You still see the glittering stuff down at the bottom of the well",
-							"You really should get your hands on that treasure"
-						]
-					}
+					"dialogue": [
+						"You still see the glittering stuff down at the bottom of the well",
+						"You really should get your hands on that treasure"
+					]
 				},
 				"false": {
 					"rate": 10,
@@ -48,12 +44,10 @@
 			}
 		},
 		"threaten": {
-			"success": {
-				"dialogue": [
-					"You won't be able to scare this well, or any well to be honest",
-					"This is not the way"
-				]
-			}
+			"dialogue": [
+				"You won't be able to scare this well, or any well to be honest",
+				"This is not the way"
+			]
 		},
 		"collect": {
 			"prerequisite": {
@@ -95,29 +89,23 @@
 									}
 								},
 								"false": {
-									"success": {
-										"dialogue": [
-											"You can not reach far enough to collect the treasure hidden at the bottom of the well"
-										]
-									}
+									"dialogue": [
+										"You can not reach far enough to collect the treasure hidden at the bottom of the well"
+									]
 								}
 							}
 						},
 						"false": {
-							"success": {
-								"dialogue": [
-									"There's nothing left here to collect."
-								]
-							}
+							"dialogue": [
+								"There's nothing left here to collect."
+							]
 						}
 					}
 				},
 				"false": {
-					"success": {
-						"dialogue": [
-							"You find nothing to collect here."
-						]
-					}
+					"dialogue": [
+						"You find nothing to collect here."
+					]
 				}
 			}
 		}

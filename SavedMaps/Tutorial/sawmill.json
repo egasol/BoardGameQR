@@ -7,12 +7,10 @@
 	},
 	"interaction": {
 		"barter": {
-			"success": {
-				"dialogue": [
-					"You attempt to barter with the inanimate facility, but it won't budge.",
-					"I'm not really sure what you're attempting to achieve here, this is no place for bartering."
-				]
-			}
+			"dialogue": [
+				"You attempt to barter with the inanimate facility, but it won't budge.",
+				"I'm not really sure what you're attempting to achieve here, this is no place for bartering."
+			]
 		},
 		"perception": {
 			"prerequisite": {
@@ -43,22 +41,18 @@
 					}
 				},
 				"false": {
-					"success": {
-						"dialogue": [
-							"All other equipment here have been decayed and is of no use",
-							"The sawblade you've found was the only item not rusted to oblivion."
-						]
-					}
+					"dialogue": [
+						"All other equipment here have been decayed and is of no use",
+						"The sawblade you've found was the only item not rusted to oblivion."
+					]
 				}
 			}
 		},
 		"threaten": {
-			"success": {
-				"dialogue": [
-					"You attempt to threaten the sawmill, but there is no response.",
-					"Despite your superior exercise in authority, it has no effect on the sawmill."
-				]
-			}
+			"dialogue": [
+				"You attempt to threaten the sawmill, but there is no response.",
+				"Despite your superior exercise in authority, it has no effect on the sawmill."
+			]
 		}
 	}
 }

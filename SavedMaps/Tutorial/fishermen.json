@@ -47,31 +47,25 @@
 									}
 								},
 								"false": {
-									"success": {
-										"dialogue": [
-											"You do not have enough money to trade the fishingrod."
-										]
-									}
+									"dialogue": [
+										"You do not have enough money to trade the fishingrod."
+									]
 								}
 							}
 						},
 						"false": {
-							"success": {
-								"dialogue": [
-									"The fishermen claim that the've already traded you their only spare fishing rod.",
-									"There's only two rods left, that the men currently are fishing with. It's not likely that you will be able to barter them."
-								]
-							}
+							"dialogue": [
+								"The fishermen claim that the've already traded you their only spare fishing rod.",
+								"There's only two rods left, that the men currently are fishing with. It's not likely that you will be able to barter them."
+							]
 						}
 					}
 				},
 				"false": {
-					"success": {
-						"dialogue": [
-							"The fishermen claim that they got nothing to offer you.",
-							"These men carry no item of value."
-						]
-					}
+					"dialogue": [
+						"The fishermen claim that they got nothing to offer you.",
+						"These men carry no item of value."
+					]
 				}
 			}
 		},
@@ -98,12 +92,10 @@
 					}
 				},
 				"false": {
-					"success": {
-						"dialogue": [
-							"Nothing is left here, considering you've already collected their fishing equipment.",
-							"There is nothing left here, that you've not already obtained."
-						]
-					}
+					"dialogue": [
+						"Nothing is left here, considering you've already collected their fishing equipment.",
+						"There is nothing left here, that you've not already obtained."
+					]
 				}
 			}
 		},
@@ -136,12 +128,10 @@
 					}
 				},
 				"false": {
-					"success": {
-						"dialogue": [
-							"They scurry away from their position, but they leave nothing left to offer.",
-							"You enjoy terrifying these plebians. But there's no bounty left to collect here."
-						]
-					}
+					"dialogue": [
+						"They scurry away from their position, but they leave nothing left to offer.",
+						"You enjoy terrifying these plebians. But there's no bounty left to collect here."
+					]
 				}
 			}
 		}

@@ -119,8 +119,7 @@ class Party:
                 success_rate = interaction.get("rate")
 
                 if success_rate is None:
-                    # TODO: Replace with response = interaction after updating event files
-                    response = interaction.get("success")
+                    response = interaction
                 else:
                     # TODO: Add modifier based on player stats.
                     # TODO: Consume card during rolls
