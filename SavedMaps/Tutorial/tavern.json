@@ -1,0 +1,54 @@
+{
+	"name": "a tavern",
+	"symbol": "☗",
+	"enter": "You step into a dimly lit tavern, the air thick with the scent of aged wood and spirits.",
+	"status": {
+		"goldchain": false
+	},
+	"interaction": {
+		"rumor": {
+			"prerequisite": {
+				"status_name": "goldchain",
+				"false": {
+					"prerequisite": {
+						"item": "gold",
+						"amount": 5,
+						"true": {
+							"rate": 6,
+							"success": {
+								"dialogue": [
+									"The bartender leans in, eyes gleaming. 'Listen closely,' they whisper. 'In the old well outside, there lies a hidden gold chain. Find a way to collect it, and it's yours.'"
+								],
+								"status_update": {
+									"status_name": "goldchain",
+									"status_set": true
+								},
+								"inventory_update": [
+									{
+										"name": "gold",
+										"amount": -5
+									}
+								]
+							},
+							"failure": {
+								"dialogue": [
+									"The bartender chuckles, wiping a glass. 'Not enough gold, my friend. Come back when your purse is heavier.'"
+								]
+							}
+						},
+						"false": {
+							"dialogue": [
+								"The bartender shakes their head. 'Not today, adventurer. You need more gold to acquire any rumors from me.'"
+							]
+						}
+					}
+				},
+				"true": {
+					"dialogue": [
+						"The bartender leans across the counter, eyes narrowing. 'You've already asked about the gold chain, my curious friend. No more secrets for you.'"
+					]
+				}
+			}
+		}
+	}
+}

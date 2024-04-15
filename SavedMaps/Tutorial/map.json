@@ -33,6 +33,11 @@
 			"x": 5,
 			"y": 4,
 			"file": "well.json"
+		},
+		{
+			"x": 6,
+			"y": 4,
+			"file": "tavern.json"
 		}
 	]
 }
